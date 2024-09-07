@@ -1,6 +1,6 @@
 NAME		= philo
 
-SRCS		= main.c clean.c forks.c philo_actions.c parsing.c print.c singleton.c time.c 
+SRCS		= main.c clean.c forks.c philo_actions.c parsing.c logger.c singleton.c time.c 
 
 OBJS		= $(SRCS:.c=.o)
 

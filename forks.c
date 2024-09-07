@@ -6,13 +6,13 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:39:52 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 20:39:53 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 20:54:41 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_forks	*forks_init()
+t_forks	*forks_init(void)
 {
 	t_forks	*forks;
 	int		i;
@@ -31,7 +31,6 @@ t_forks	*forks_init()
 
 int	attempt_to_eat(t_philo *philo)
 {
-
 	philo->right_fork = philo->id;
 	philo->left_fork = (philo->id - 1 + data()->philo_nbr) % data()->philo_nbr;
 	if (is_philosopher_alive(philo))
@@ -69,4 +68,14 @@ int	try_pick_up_fork(t_philo *philosopher, int index)
 			pthread_mutex_unlock(&philosopher->forks[index].fork_mutex);
 	}
 	return (0);
+}
+
+bool	is_simulation_over(void)
+{
+	bool	is_terminated;
+
+	pthread_mutex_lock(&death_status()->death_mutex);
+	is_terminated = death_status()->is_dead;
+	pthread_mutex_unlock(&death_status()->death_mutex);
+	return (is_terminated);
 }

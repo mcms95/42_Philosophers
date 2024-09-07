@@ -6,12 +6,11 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:40:05 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 20:40:06 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:00:28 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	philosopher_sleep(t_philo *philos)
 {
@@ -57,42 +56,42 @@ void	*philosopher_routine(void *arg)
 {
 	t_philo	*philosopher ;
 
-	philosopher  = (t_philo *)arg;
+	philosopher = (t_philo *)arg;
 	if (philosopher ->id % 2 == 0)
 		precise_usleep(70000);
 	philosopher ->time_of_last_meal = data()->start_time;
-	while (is_philosopher_alive(philosopher ))
+	while (is_philosopher_alive(philosopher))
 	{
-		attempt_to_eat(philosopher );
+		attempt_to_eat(philosopher);
 		if (philosopher ->meals_eaten == data()->meals_to_eat)
 			return (NULL);
-		philosopher_sleep(philosopher );
+		philosopher_sleep(philosopher);
 		precise_usleep(100);
 		if (!is_simulation_over())
-			print_message(philosopher , "is thinking");
+			print_message(philosopher, "is thinking");
 	}
 	return (NULL);
 }
 
-bool is_philosopher_alive(t_philo *philos)
+bool	is_philosopher_alive(t_philo *philos)
 {
-    long last;
+	long	time_since_last_meal;
 
-    if (is_simulation_over())
-        return false;
-    last = get_time(MILLISECOND) - philos->time_of_last_meal;
-    if (last >= philos->data->time_to_die)
-    {
-        pthread_mutex_lock(&death_status()->death_mutex);
-        if (!death_status()->is_dead)
-        {
-            death_status()->is_dead = true;
-            print_message(philos, "died");
-        }
-        pthread_mutex_unlock(&death_status()->death_mutex);
-        return false;
-    }
-    return true;
+	if (is_simulation_over())
+		return (false);
+	time_since_last_meal = get_time(MILLISECOND) - philos->time_of_last_meal;
+	if (time_since_last_meal >= philos->data->time_to_die)
+	{
+		pthread_mutex_lock(&death_status()->death_mutex);
+		if (!death_status()->is_dead)
+		{
+			death_status()->is_dead = true;
+			print_message(philos, "died");
+		}
+		pthread_mutex_unlock(&death_status()->death_mutex);
+		return (false);
+	}
+	return (true);
 }
 
 t_philo	*philos_init(void)

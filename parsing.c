@@ -6,21 +6,21 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:40:02 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 20:40:03 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:07:18 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 int	parse_arguments(char **av)
 {
-	// Valid number checked
-	if (!is_valid_number(av[1]) || !is_valid_number(av[2]) 
+	if (!is_valid_number(av[1]) || !is_valid_number(av[2])
 		|| !is_valid_number(av[3]) || !is_valid_number(av[4]))
 		return (0);
-	if (!is_within_valid_range(ft_atoi(av[1])) || !is_within_valid_range(ft_atoi(av[2])) 
-		||!is_within_valid_range(ft_atoi(av[3])) ||!is_within_valid_range(ft_atoi(av[4])))
+	if (!is_within_valid_range(ft_atoi(av[1]))
+		|| !is_within_valid_range(ft_atoi(av[2]))
+		||!is_within_valid_range(ft_atoi(av[3]))
+		||!is_within_valid_range(ft_atoi(av[4])))
 		return (0);
 	data()->philo_nbr = ft_atoi(av[1]);
 	data()->time_to_die = ft_atoi(av[2]);
@@ -33,9 +33,10 @@ int	parse_arguments(char **av)
 			if (is_within_valid_range(ft_atoi(av[5])))
 				data()->meals_to_eat = ft_atoi(av[5]);
 		}
-		else 
+		else
 			return (0);
 	}
+	death_status()->is_dead = false;
 	return (1);
 }
 
@@ -50,7 +51,6 @@ int	is_valid_number(char *str)
 	{
 		if (str[i] == '-')
 			return (0);
-			
 		i++;
 	}
 	while (str[i])
@@ -62,7 +62,7 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
-int is_within_valid_range(int number)
+int	is_within_valid_range(int number)
 {
 	if (number <= 0 || number > INT_MAX)
 		return (0);

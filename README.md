@@ -44,12 +44,6 @@
 
 we use the struct timeval and function gettimeofday to get the time that are in <sys/time.h> library
 
-## Singleton
-
-- A singleton in C is a design pattern that ensures only one instance of a class can be created and provides a global point of access to that instance.
-- In this case we call data() and it returns a pointer to our main struct of type t_data
-- Access a paramater - data()-> time_to_die;
-- Can be initialized in any part of the program to be accessible 
 
 ```c
 #include <sys/time.h>
@@ -77,6 +71,45 @@ int main() {
     return 0;
 }
 ```
+
+## Singleton
+
+- A singleton in C is a design pattern that ensures only one instance of a class can be created and provides a global point of access to that instance.
+- In this case we call data() and it returns a pointer to our main struct of type t_data
+- Access a paramater - data()-> time_to_die;
+- Can be initialized in any part of the program to be accessible 
+
+```c
+typedef struct s_data	t_data;
+
+struct s_data{
+	int				time_to_die;
+	int				time_to_sleep;
+	int				time_to_think;
+	int				meals_to_eat;
+	int				time_to_eat;
+	int				philo_nbr;
+	long 			start_time;
+	t_data			*data;
+	t_dead			*death;
+	t_forks			*forks;
+	t_philo			*philos;
+};
+
+t_data	*data(void)
+{
+	static t_data info;
+
+	return (&info);
+}
+
+void    example()
+{
+    // Access time_to_die
+    data()->time_to_die = 0;
+}
+```
+
 
 #### Valgrind
 valgrind --leak-check=full --show-leak-kinds=all ./philo 800 700 700 700

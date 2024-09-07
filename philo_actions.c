@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:40:05 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 21:00:28 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:14:08 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	philosopher_sleep(t_philo *philos)
 	napping = 0;
 	if (is_simulation_over())
 		return (0);
-	print_message(philos, "is sleeping");
+	log_philosopher_action(philos, "is sleeping");
 	precise_usleep(100);
 	while (napping <= data()->time_to_sleep && is_philosopher_alive(philos))
 		napping = get_time(MILLISECOND) - nap_time;
@@ -40,7 +40,7 @@ int	philosopher_eat(t_philo *philo)
 	precise_usleep(100);
 	if (is_philosopher_alive(philo))
 	{
-		print_message(philo, "is eating");
+		log_philosopher_action(philo, "is eating");
 		while (eating <= data()->time_to_eat && is_philosopher_alive(philo))
 			eating = get_time(MILLISECOND) - eat_time;
 		philo->time_of_last_meal = get_time(MILLISECOND);
@@ -68,7 +68,7 @@ void	*philosopher_routine(void *arg)
 		philosopher_sleep(philosopher);
 		precise_usleep(100);
 		if (!is_simulation_over())
-			print_message(philosopher, "is thinking");
+			log_philosopher_action(philosopher, "is thinking");
 	}
 	return (NULL);
 }
@@ -86,7 +86,7 @@ bool	is_philosopher_alive(t_philo *philos)
 		if (!death_status()->is_dead)
 		{
 			death_status()->is_dead = true;
-			print_message(philos, "died");
+			log_philosopher_action(philos, "died");
 		}
 		pthread_mutex_unlock(&death_status()->death_mutex);
 		return (false);

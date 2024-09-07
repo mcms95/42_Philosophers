@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:39:52 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 20:54:41 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:13:56 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	try_pick_up_fork(t_philo *philosopher, int index)
 		{
 			philosopher->forks[index].has_fork = 1;
 			philosopher->forks_nbr += 1;
-			print_message(philosopher, "has taken a fork");
+			log_philosopher_action(philosopher, "has taken a fork");
 			pthread_mutex_unlock(&philosopher->forks[index].fork_mutex);
 			break ;
 		}

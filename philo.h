@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:40:14 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 21:03:04 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:13:53 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ struct	s_philo
 	t_forks			*forks;
 };
 
-// main.c
-void	start_simulation(void);
-bool	is_simulation_over(void);
-
 // clean.c
 void	clean_all(t_philo *philos, t_forks *forks);
 
@@ -88,6 +84,13 @@ t_forks	*forks_init(void);
 int		attempt_to_eat(t_philo *phi);
 void	release_forks(t_philo *phi, int index);
 int		try_pick_up_fork(t_philo *phi, int index);
+bool	is_simulation_over(void);
+
+// logger.c
+void	log_philosopher_action(t_philo *philos, char *str);
+
+// main.c
+void	start_simulation(void);
 
 // parsing.c
 int		parse_arguments(char **av);
@@ -101,9 +104,6 @@ int		philosopher_eat(t_philo *philos);
 void	*philosopher_routine(void *arg);
 bool	is_philosopher_alive(t_philo *philos);
 t_philo	*philos_init(void);
-
-// print.c
-void	print_message(t_philo *philos, char *str);
 
 // Singleton.c
 t_data	*data(void);

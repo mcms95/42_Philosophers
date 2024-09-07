@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:40:05 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 21:14:08 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/07 21:46:05 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*philosopher_routine(void *arg)
 
 	philosopher = (t_philo *)arg;
 	if (philosopher ->id % 2 == 0)
-		precise_usleep(70000);
+		precise_usleep(50000);
 	philosopher ->time_of_last_meal = data()->start_time;
 	while (is_philosopher_alive(philosopher))
 	{

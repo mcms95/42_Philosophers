@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:39:56 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 21:34:25 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/09 16:11:54 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ void	start_simulation(void)
 			philosopher_routine, (void *)&philos[i]);
 	while (--i > -1)
 		pthread_join(philos[i].philo, NULL);
-	free(philos);
-	i = -1;
-	while (++i < data()->philo_nbr)
-		pthread_mutex_destroy(&forks[i].fork_mutex);
-	free(forks);
+	clean_all(philos, forks);
 	return ;
 }
 

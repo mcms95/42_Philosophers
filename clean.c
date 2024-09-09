@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:39:43 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 20:47:10 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/09 16:09:46 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	clean_all(t_philo *philos, t_forks *forks)
 	}
 	if (philos)
 		free(philos);
+	pthread_mutex_destroy(&death_status()->death_mutex);
 }

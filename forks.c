@@ -6,7 +6,7 @@
 /*   By: nuno <nuno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 20:39:52 by nuno              #+#    #+#             */
-/*   Updated: 2024/09/07 21:45:40 by nuno             ###   ########.fr       */
+/*   Updated: 2024/09/10 08:29:36 by nuno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	attempt_to_eat(t_philo *philo)
 {
 	if (data()->philo_nbr == 1)
 	{
-		philo->right_fork = philo->id;
+		philo->right_fork = 0;
 		try_pick_up_fork(philo, philo->right_fork);
 		while (is_philosopher_alive(philo))
 			precise_usleep(1000);
 		release_forks(philo, philo->right_fork);
 		return (0);
 	}
-	philo->right_fork = philo->id;
+	philo->right_fork = philo->id % data()->philo_nbr;
 	philo->left_fork = (philo->id - 1 + data()->philo_nbr) % data()->philo_nbr;
 	if (is_philosopher_alive(philo))
 	{
